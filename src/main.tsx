@@ -11,7 +11,6 @@ import { Auth } from './pages/Auth';
 const theme = createTheme({
   fontFamily: 'Inter, sans-serif',
   primaryColor: 'grape',
-  defaultColorScheme: 'dark',
 });
 
 function Root() {
@@ -34,7 +33,7 @@ function Root() {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={theme} defaultColorScheme="dark">
       <Root />
     </MantineProvider>
   </React.StrictMode>,
