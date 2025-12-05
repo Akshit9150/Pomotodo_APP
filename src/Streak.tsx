@@ -81,12 +81,12 @@ export function Streak() {
   return (
     <Paper withBorder p="xl" radius="md">
       <Group>
-        <IconFlame size={64} color="orange" />
+        <IconFlame size={64} color="grape" />
         <Stack gap="xs">
-          <Text size="xl" fw={700} c="orange.3">
+          <Text size="xl" fw={700} c="grape.3">
             Current Streak
           </Text>
-          <Text size="4rem" fw={900} c="orange.5">
+          <Text size="4rem" fw={900} c="grape.5">
             {currentStreak}
           </Text>
           <Text size="lg" c="dimmed">

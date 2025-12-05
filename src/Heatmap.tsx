@@ -44,7 +44,7 @@ export function Heatmap() {
 
   return (
     <Paper withBorder p="xl" radius="md">
-      <Text size="xl" fw={700} mb="md" c="cyan.2">Contribution</Text>
+      <Text size="xl" fw={700} mb="md">Contribution</Text>
       <CalendarHeatmap
         startDate={sixMonthsAgo}
         endDate={new Date()}

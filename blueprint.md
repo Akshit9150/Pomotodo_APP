@@ -1,5 +1,5 @@
 
-# Project Blueprint: Pomodoro + Todo App
+# Project Blueprint: Pomotodo
 
 ## Overview
 
@@ -11,25 +11,32 @@ This document outlines the plan and progress for creating a combined Pomodoro an
     *   Project initialized with Vite and React.
     *   TypeScript is used for type safety.
 *   **Component Library:** Mantine is integrated for a rich set of UI components and hooks.
-*   **Styling:** A dark blue theme is implemented using Mantine's theming capabilities.
+*   **Styling:** A modern, minimalist dark theme is implemented using Mantine's theming capabilities. The primary color is a vibrant "grape" purple.
+*   **Branding:** A custom logo for "Pomotodo" has been created and integrated into the application's header and authentication pages.
 *   **Firebase Integration:**
     *   Firebase SDK is added to the project.
     *   Firebase configuration file is created.
     *   Firebase MCP configuration is set up for deployment.
 *   **Core Components:**
-    *   **`Header.tsx`**: A simple header for the application with a logout button.
+    *   **`Header.tsx`**: A modern header featuring the Pomotodo logo and a logout button.
     *   **`Pomodoro.tsx`**: The main Pomodoro timer component.
     *   **`TodoList.tsx`**: The component for managing the user's tasks.
     *   **`Streak.tsx`**: A component to display the user's daily streak.
     *   **`Heatmap.tsx`**: A component to display a heatmap of the user's contributions.
-*   **Authentication:** User authentication is implemented using Firebase Auth, with a dedicated login page.
+*   **Authentication:** User authentication is implemented using Firebase Auth, with a dedicated login page that matches the application's theme and features the Pomotodo logo.
 *   **Layout:** A responsive grid layout is used to display the main components.
 
 ## Current Plan
 
 ### Phase 1: Core Functionality and UI Setup (Completed)
 
-### Phase 2: Advanced Features (In Progress)
+### Phase 2: Refactoring, Theming, and Branding (Completed)
+
+*   **Theme Update:** The entire application has been updated to use a new modern, minimalist theme with a "grape" primary color.
+*   **Code Refactoring:** All components have been refactored to remove hardcoded styles and use the Mantine theme for a consistent look and feel.
+*   **Branding:** The application has been branded as "Pomotodo" with a custom logo.
+
+### Phase 3: Advanced Features (In Progress)
 
 *   **Pomodoro Timer:**
     *   Implement start, pause, and reset functionality.
@@ -46,6 +53,6 @@ This document outlines the plan and progress for creating a combined Pomodoro an
 *   **Heatmap:**
     *   Display a 6-month contribution heatmap.
 
-### Phase 3: Deployment
+### Phase 4: Deployment
 
 *   Deploy the application to Firebase Hosting.

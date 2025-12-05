@@ -37,11 +37,6 @@ function App() {
     <AppShell
       padding="md"
       header={{ height: 60 }}
-      styles={{
-        main: {
-          backgroundColor: '#1A1B1E',
-        },
-      }}
     >
       <AppHeader />
       <AppShell.Main>

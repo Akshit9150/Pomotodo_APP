@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { Paper, TextInput, PasswordInput, Button, Title, Text, Anchor } from '@mantine/core';
+import { Paper, TextInput, PasswordInput, Button, Title, Text, Anchor, Center, Stack } from '@mantine/core';
+import { Logo } from '../Logo';
 
 export function Auth() {
   const [email, setEmail] = useState('');
@@ -23,9 +24,12 @@ export function Auth() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#101113' }}>
+    <Center style={{ height: '100vh' }}>
       <Paper withBorder shadow="md" p={30} mt={30} radius="md" style={{ width: 400 }}>
-        <Title ta="center" c="cyan.2">{isLogin ? 'Login' : 'Sign Up'}</Title>
+        <Stack align="center" mb="xl">
+          <Logo />
+          <Title ta="center">{isLogin ? 'Welcome back!' : 'Create an account'}</Title>
+        </Stack>
         <TextInput
           label="Email"
           placeholder="you@mantine.dev"
@@ -33,13 +37,6 @@ export function Auth() {
           value={email}
           onChange={(event) => setEmail(event.currentTarget.value)}
           mt="md"
-          styles={{ 
-            label: { color: '#E9ECEF' }, 
-            input: { 
-              color: '#E9ECEF', 
-              backgroundColor: '#2C2E33'
-            } 
-          }}
         />
         <PasswordInput
           label="Password"
@@ -48,16 +45,9 @@ export function Auth() {
           value={password}
           onChange={(event) => setPassword(event.currentTarget.value)}
           mt="md"
-          styles={{ 
-            label: { color: '#E9ECEF' }, 
-            input: { 
-              color: '#E9ECEF', 
-              backgroundColor: '#2C2E33'
-            } 
-          }}
         />
         {error && <Text c="red" size="sm" ta="center" mt="sm">{error}</Text>}
-        <Button fullWidth mt="xl" onClick={handleSubmit} color="cyan">
+        <Button fullWidth mt="xl" onClick={handleSubmit} color="grape">
           {isLogin ? 'Sign in' : 'Sign up'}
         </Button>        
         <Text c="dimmed" size="sm" ta="center" mt="md">
@@ -67,6 +57,6 @@ export function Auth() {
           </Anchor>
         </Text>
       </Paper>
-    </div>
+    </Center>
   );
 }

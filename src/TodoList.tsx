@@ -64,8 +64,8 @@ export function TodoList({ onSelectTodo }: TodoListProps) {
   const completedTodos = todos?.docs.filter(doc => doc.data().completed) || [];
 
   return (
-    <Paper withBorder p="xl" radius="md" style={{ width: '350px' }}>
-      <Text size="xl" fw={700} style={{ marginBottom: '1rem' }} c="cyan.2">
+    <Paper withBorder p="xl" radius="md">
+      <Text size="xl" fw={700} mb="md">
         Todo List
       </Text>
       <Group mb="md">
@@ -74,7 +74,6 @@ export function TodoList({ onSelectTodo }: TodoListProps) {
           value={newTodo}
           onChange={(event) => setNewTodo(event.currentTarget.value)}
           style={{ flex: 1 }}
-          styles={{ input: { color: '#E9ECEF', backgroundColor: '#2C2E33' } }}
         />
         <NumberInput 
           value={duration}
@@ -82,9 +81,9 @@ export function TodoList({ onSelectTodo }: TodoListProps) {
           placeholder="Mins"
           min={1}
           max={120}
-          styles={{ input: { width: 70, color: '#E9ECEF', backgroundColor: '#2C2E33' } }}
+          w={70}
         />
-        <Button onClick={addTodo}>Add</Button>
+        <Button onClick={addTodo} color="grape">Add</Button>
       </Group>
       {loading && <Text>Loading...</Text>}
       {error && <Text c="red">Error: {error.message}</Text>}
@@ -95,9 +94,9 @@ export function TodoList({ onSelectTodo }: TodoListProps) {
           const todo = { id: todoDoc.id, ...todoDoc.data() } as Todo;
           return (
             <List.Item key={todo.id}>
-              <Paper withBorder radius="md" p="xs" onClick={() => onSelectTodo(todo)} style={{ backgroundColor: '#1A1B1E', cursor: 'pointer'}}>
+              <Paper withBorder radius="md" p="xs" onClick={() => onSelectTodo(todo)} style={{cursor: 'pointer'}}>
                 <Group justify="space-between">
-                  <Text c={'cyan.2'}>{todo.text}</Text>
+                  <Text>{todo.text}</Text>
                   <Text size="sm" c="dimmed">{formatTime(todo.remainingTime)}</Text>
                 </Group>
               </Paper>
@@ -114,10 +113,10 @@ export function TodoList({ onSelectTodo }: TodoListProps) {
               const todo = { id: todoDoc.id, ...todoDoc.data() } as Todo;
               return (
                 <List.Item key={todo.id}>
-                  <Paper radius="md" p="xs" style={{ backgroundColor: 'transparent' }}>
+                  <Paper radius="md" p="xs">
                     <Group justify="space-between">
                       <Group>
-                        <ThemeIcon color="green" radius="xl"><IconCheck size={16}/></ThemeIcon>
+                        <ThemeIcon color="grape" radius="xl"><IconCheck size={16}/></ThemeIcon>
                         <Text td='line-through' c='dimmed'>
                           {todo.text}
                         </Text>

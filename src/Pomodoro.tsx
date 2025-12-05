@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { RingProgress, Text, Paper, Group, ActionIcon, Stack } from '@mantine/core';
+import { RingProgress, Text, Paper, Group, ActionIcon, Stack, useMantineTheme } from '@mantine/core';
 import { IconPlayerPlay, IconPlayerPause, IconRefresh } from '@tabler/icons-react';
 import type { Todo } from './TodoList';
 
@@ -11,6 +11,7 @@ interface PomodoroProps {
 }
 
 export function Pomodoro({ selectedTodo, onTimerUpdate, onTimerComplete }: PomodoroProps) {
+  const theme = useMantineTheme();
   const [timeLeft, setTimeLeft] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [totalDuration, setTotalDuration] = useState(0);
@@ -68,23 +69,23 @@ export function Pomodoro({ selectedTodo, onTimerUpdate, onTimerComplete }: Pomod
   return (
     <Paper withBorder p="xl" radius="md">
       <Stack align="center">
-        <Text size="xl" fw={700} c="cyan.2">
+        <Text size="xl" fw={700}>
           {selectedTodo ? selectedTodo.text : 'Select a Task'}
         </Text>
         <RingProgress
           size={220}
           thickness={12}
           roundCaps
-          sections={[{ value: 100 - progress, color: 'cyan' }]}
-          rootColor="#2C2E33"
+          sections={[{ value: 100 - progress, color: 'grape' }]}
+          rootColor={theme.colors.dark[7]}
           label={
-            <Text c="cyan.3" fw={700} ta="center" size="3rem">
+            <Text c="grape" fw={700} ta="center" size="3rem">
               {formatTime(timeLeft)}
             </Text>
           }
         />
         <Group justify="center" mt="xl">
-          <ActionIcon size="xl" radius="xl" variant="filled" color="cyan" onClick={toggleTimer} disabled={!selectedTodo}>
+          <ActionIcon size="xl" radius="xl" variant="filled" color="grape" onClick={toggleTimer} disabled={!selectedTodo}>
             {isActive ? <IconPlayerPause size={32} /> : <IconPlayerPlay size={32} />}
           </ActionIcon>
           <ActionIcon size="xl" radius="xl" variant="outline" color="gray" onClick={resetTimer} disabled={!selectedTodo}>

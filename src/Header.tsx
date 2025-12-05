@@ -1,6 +1,6 @@
-
-import { AppShell, Title, Button } from '@mantine/core';
+import { AppShell, Button, Group } from '@mantine/core';
 import { auth } from './firebase';
+import { Logo } from './Logo';
 
 export function AppHeader() {
 
@@ -9,11 +9,13 @@ export function AppHeader() {
   };
 
   return (
-    <AppShell.Header p="xs" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#1A1B1E', borderBottom: '1px solid #2C2E33' }}>
-      <Title order={3} style={{ color: 'white' }}>Pomodoro + Todo</Title>
-      <Button onClick={handleLogout} variant="outline" color="red">
-        Logout
-      </Button>
+    <AppShell.Header p="md">
+      <Group justify="space-between">
+        <Logo />
+        <Button onClick={handleLogout} variant="light" color="grape">
+          Logout
+        </Button>
+      </Group>
     </AppShell.Header>
   );
 }

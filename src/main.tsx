@@ -8,15 +8,19 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
 import { Auth } from './pages/Auth';
 
-const theme = createTheme({});
+const theme = createTheme({
+  fontFamily: 'Inter, sans-serif',
+  primaryColor: 'grape',
+  defaultColorScheme: 'dark',
+});
 
 function Root() {
   const [user, loading] = useAuthState(auth);
 
   if (loading) {
     return (
-      <Center style={{ height: '100vh', backgroundColor: '#1A1B1E' }}>
-        <Loader color="cyan" />
+      <Center style={{ height: '100vh' }}>
+        <Loader color="grape" />
       </Center>
     );
   }
