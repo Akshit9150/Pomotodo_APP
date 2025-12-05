@@ -1,10 +1,37 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import '@mantine/core/styles.css';
+import { MantineProvider, createTheme, Loader, Center } from '@mantine/core';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebase';
+import { Auth } from './pages/Auth';
+
+const theme = createTheme({});
+
+function Root() {
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return (
+      <Center style={{ height: '100vh', backgroundColor: '#1A1B1E' }}>
+        <Loader color="cyan" />
+      </Center>
+    );
+  }
+
+  if (!user) {
+    return <Auth />;
+  }
+
+  return <App />;
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <MantineProvider theme={theme}>
+      <Root />
+    </MantineProvider>
+  </React.StrictMode>,
+);

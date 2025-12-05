@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { AppShell, Grid } from '@mantine/core';
+import { AppHeader } from './Header';
+import { Pomodoro } from './Pomodoro';
+import { TodoList } from './TodoList';
+import type { Todo } from './TodoList';
+import { Streak } from './Streak';
+import { Heatmap } from './Heatmap';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from './firebase';
+import { doc, updateDoc } from 'firebase/firestore';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user] = useAuthState(auth);
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+
+  const handleSelectTodo = (todo: Todo) => {
+    setSelectedTodo(todo);
+  };
+
+  const handleTimerUpdate = async (remainingTime: number) => {
+    if (user && selectedTodo) {
+      const todoDoc = doc(db, 'users', user.uid, 'todos', selectedTodo.id);
+      await updateDoc(todoDoc, { remainingTime });
+    }
+  };
+
+  const handleTimerComplete = async () => {
+    if (user && selectedTodo) {
+      const todoDoc = doc(db, 'users', user.uid, 'todos', selectedTodo.id);
+      await updateDoc(todoDoc, { completed: true, remainingTime: 0 });
+      setSelectedTodo(null);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppShell
+      padding="md"
+      header={{ height: 60 }}
+      styles={{
+        main: {
+          backgroundColor: '#1A1B1E',
+        },
+      }}
+    >
+      <AppHeader />
+      <AppShell.Main>
+        <Grid>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <Streak />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <Pomodoro 
+              selectedTodo={selectedTodo}
+              onTimerUpdate={handleTimerUpdate}
+              onTimerComplete={handleTimerComplete}
+            />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <TodoList onSelectTodo={handleSelectTodo} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Heatmap />
+          </Grid.Col>
+        </Grid>
+      </AppShell.Main>
+    </AppShell>
+  );
 }
 
-export default App
+export default App;
